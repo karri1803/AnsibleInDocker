@@ -1,0 +1,16 @@
+---
+ - hosts: all
+   become: true
+   
+   tasks:
+   
+     - name: list security updates
+       yum:
+         list: security
+         register: result
+
+     - name: install security updates
+       yum:
+         name: '*'
+         security: yes
+         state: latest
