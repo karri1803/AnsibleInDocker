@@ -1,0 +1,8 @@
+Most simplest version of instructions, just for my memory:
+
+- wsl2
+- user ansible
+- ssh-keys to same folder as Dockerfile
+- Build Dockerfile
+- Run sshkey.yml
+- Run testi.yml
