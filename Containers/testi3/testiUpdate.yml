@@ -4,11 +4,6 @@
    
    tasks:
    
-     - name: list security updates
-       yum:
-         list: security
-         register: result
-
      - name: install security updates
        yum:
          name: '*'

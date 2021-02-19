@@ -1,5 +1,6 @@
 FROM alpine:3.7
 ARG VERSION=2.9.3
+ARG USER_HOME
 
 RUN \
 # apk add installs the following
@@ -15,6 +16,8 @@ apk add \
 	py-setuptools \
 	py-yaml \
 	openssh-client \
+        sshpass \
+	sudo \
 	bash \
 	tar && \
  pip install --upgrade pip
@@ -22,7 +25,7 @@ apk add \
 RUN mkdir /etc/ansible/ /ansible
 RUN echo "[local]" >> /etc/ansible/hosts && \
     echo "localhost" >> /etc/ansible/hosts && \
-    echo "192.168.140.193" >> /etc/ansible/hosts
+    echo "ansible@192.168.140.193" >> /etc/ansible/hosts
 
 RUN \
   curl -fsSL https://releases.ansible.com/ansible/ansible-${VERSION}.tar.gz -o ansible.tar.gz && \
@@ -40,6 +43,16 @@ ENV ANSIBLE_SSH_PIPELINING True
 ENV PATH /ansible/bin:$PATH
 ENV PYTHONPATH /ansible/lib
 
-RUN mkdir -p ~/vars && cd ~/vars && ssh-keygen -t rsa -f id_rsa -P ""
+RUN adduser -u 1000 -h /home/ansible -D ansible
+RUN passwd -d ansible
+RUN echo "ansible ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+USER ansible
+
+RUN mkdir /home/ansible/.ssh
+
+COPY $USER_HOME/id_rsa /home/ansible/.ssh/id_rsa
+COPY $USER_HOME/id_rsa.pub /home/ansible/.ssh/id_rsa.pub
+RUN sudo chown ansible /home/ansible/.ssh/id_rsa.pub
+RUN sudo chown ansible /home/ansible/.ssh/id_rsa
 
 ENTRYPOINT ["ansible-playbook"]
