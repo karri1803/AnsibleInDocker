@@ -1,8 +1,9 @@
 Most simplest version of instructions, just for my memory:
 
 - wsl2
-- user ansible
-- ssh-keys to same folder as Dockerfile
+- user ansible and directory docker
+- ssh-keys, Dockerfile and Playbooks to docker directory.
 - Build Dockerfile
 - Run sshkey.yml
 - Run testi.yml
+- Use run commands to run playbooks.
