@@ -55,4 +55,7 @@ COPY $USER_HOME/id_rsa.pub /home/ansible/.ssh/id_rsa.pub
 RUN sudo chown ansible /home/ansible/.ssh/id_rsa.pub
 RUN sudo chown ansible /home/ansible/.ssh/id_rsa
 
+RUN chmod 600 /home/ansible/.ssh/id_rsa
+RUN chmod 644 /home/ansible/.ssh/id_rsa.pub
+
 ENTRYPOINT ["ansible-playbook"]
