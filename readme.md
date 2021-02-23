@@ -3,7 +3,9 @@ The newest version is wsl2_test.
 Older not (at the moment) working commands are at the bottom of this readme -file.
 
 
-### WSL2 version, volumes do not work, so done using COPY in Dockerfile:
+### WSL2 version, done using COPY in Dockerfile:
+Used COPY because apparently using volumes to send SSH-keys doesn't work in WSL2.
+
 All the commands:
 
 ```
