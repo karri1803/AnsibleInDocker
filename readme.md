@@ -1,9 +1,10 @@
-## Few tests about running ansible playbooks on Docker.
+# How to run ansible playbooks on Docker.
 The newest and the working version is **Containers/wsl2_test** .  
 Older not (at the moment) working commands are at the bottom of this readme -file.
 
-**WhatToDo.txt** has simple instructions, I will add better ones later.
+**WhatToDo.txt** has simple instructions and you can find more detailed ones here in **readme.md**.
 
+# Quickstart
 ### WSL2 version, done using COPY in Dockerfile:
 Used COPY because apparently using volumes to send SSH-keys doesn't work in WSL2.
 
@@ -51,7 +52,7 @@ Containers\testi3> docker run --rm -it -v ~/.ssh/private_key/id_rsa:/root/.ssh/i
 
   
     
-      
+# Detailed instructions      
 ## These instructions are still being updated, they work already however.
 
 This way you can install Ansible inside of a Docker container with few commands and use it directly with one run command. Linux distro is needed. You can either use WSL2 on Windows or Linux machine.  
