@@ -88,16 +88,16 @@ For example:
 ```
 **Dockerfile**: 
 
-> Installs Alpine (3.7) into the image.
-> Installs required packages.
-> Creates hosts -file and it's contents.
-> Installs Ansible.
-> Creates directory /ansible/playbooks and sets it as working directory.
-> Sets required Environment arguments.
-> Creates user ansible, takes it to sudoers -file and sets it as used user.
-> Creates directory /home/ansible/.ssh .
-> Copies id_rsa -keys from your device to the image and sets ansible as their owner.
--- Creates Entrypoint: ansible-playbook .
+> Installs Alpine (3.7) into the image.  
+> Installs required packages.  
+> Creates hosts -file and it's contents.  
+> Installs Ansible.  
+> Creates directory /ansible/playbooks and sets it as working directory.  
+> Sets required Environment arguments.  
+> Creates user ansible, takes it to sudoers -file and sets it as used user.  
+> Creates directory /home/ansible/.ssh .  
+> Copies id_rsa -keys from your device to the image and sets ansible as their owner.  
+-- Creates Entrypoint: ansible-playbook .  
 
 ```
 FROM alpine:3.7
