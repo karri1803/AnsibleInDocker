@@ -97,7 +97,7 @@ For example:
 > Creates user ansible, takes it to sudoers -file and sets it as used user.  
 > Creates directory /home/ansible/.ssh .  
 > Copies id_rsa -keys from your device to the image and sets ansible as their owner.  
--- Creates Entrypoint: ansible-playbook .  
+> Creates Entrypoint: ansible-playbook .  
 
 ```
 FROM alpine:3.7
@@ -170,9 +170,9 @@ For example:
 ```
 sudo nano sshkey.yml
 ```
-sshkey.yml -file:
+**sshkey.yml:**
 
-Ansible-playbook -file, that sends the SSH-keys from Docker container to hosts.
+> Ansible-playbook -file, that sends the SSH-keys from Docker container to hosts.
 
 ```
 ---
