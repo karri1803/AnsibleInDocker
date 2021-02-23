@@ -10,17 +10,21 @@ Used COPY because apparently using volumes to send SSH-keys doesn't work in WSL2
 I did this with **W10 computer** that has **WSL2** and **Ubuntu 18.04 distro**.  
 My host-machine is **CentOS 7**.
 
-Main commands:
+**Main commands:**
 
+Creates ssh-keys:
 ```
 (sudo?) ssh-keygen 
 ```
+Build Docker Image:
 ```
 sudo docker build -t ansible3:3.44 .
 ```
+Runs the sshkey.yml -playbook that sends SSH-keys to hosts:
 ```
 sudo docker run --rm -it -v /home/ansible/docker:/ansible/playbooks ansible3:3.44 --private-key=/home/ansible/.ssh/id_rsa sshkey.yml -Kk
 ```
+Runs testUpdate.yml -playbook, this si how you run playbooks:
 ```
 sudo docker run --rm -it -v /home/ansible/docker:/ansible/playbooks ansible3:3.44 --private-key=/home/ansible/.ssh/id_rsa testiUpdate.yml
 ```
@@ -28,6 +32,7 @@ sudo docker run --rm -it -v /home/ansible/docker:/ansible/playbooks ansible3:3.4
 #### If build command doesn't work in WSL2:
 Solution is:  
 In **~/.docker/config.json** change **credsStore** to **credStore**
+
 
   
 ### These are old and did not work for me, saved here for possible future use:
