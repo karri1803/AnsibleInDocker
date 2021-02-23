@@ -52,7 +52,7 @@ Containers\testi3> docker run --rm -it -v ~/.ssh/private_key/id_rsa:/root/.ssh/i
   
     
       
-## these instructions are still being updated, they work already however.
+## These instructions are still being updated, they work already however.
 
 This way you can install Ansible inside of a Docker container with few commands and use it directly with one run command. Linux distro is needed. You can either use WSL2 on Windows or Linux machine.  
 These instructions made using WSL2 on W10, Ubuntu 18.04 -distro. Should work on Linux machine too but haven't tested yet.
@@ -64,23 +64,23 @@ If you are using WSL2 and some Linux distro, you should integrate it with the Do
 
 Settings > Resources > WSL INTEGRATION > Enable <distro>  
   
-Create user ansible:
+- Create user ansible:
 ```
 adduser ansible
 ```
-Change user:
+- Change user:
 ```
 su - ansible
 ```
-Create directory docker for the user:
+- Create directory docker for the user:
 ```
 mkdir /home/ansible/docker
 ```
-Move in to the directory docker and use it now on. Create all the files and SSH-keys inside it.
+- Move in to the directory docker and use it now on. Create all the files and SSH-keys inside it.
 ```
 cd docker
 ```
-Create Dockerfile, which will build the image:
+- Create Dockerfile, which will build the image:
 
 For example:
 ```
@@ -172,7 +172,7 @@ RUN chmod 644 /home/ansible/.ssh/id_rsa.pub
 ENTRYPOINT ["ansible-playbook"]
 ```
 
-Then let's create required playbooks. First, playbook that sends SSH-keys to hosts. 
+- Then let's create required playbooks. First, playbook that sends SSH-keys to hosts. 
 Second, playbook that tests if everything works.
 
 For example: sudo nano sshkey.yml
@@ -181,7 +181,7 @@ sshkey.yml -file:
 
 Ansible-playbook -file, that sends the SSH-keys from Docker container to hosts.
 
-
+```
 ---
 - hosts: all
   become: true
@@ -193,14 +193,15 @@ Ansible-playbook -file, that sends the SSH-keys from Docker container to hosts.
         user: ansible
         state: present
         key: "{{ lookup('file', '/home/ansible/.ssh/id_rsa.pub') }}"
-Esim. sudo nano testiUpdate.yml
+```        
+For example: sudo nano testiUpdate.yml
 
-testiUpdate.yml
+**testiUpdate.yml**
 
 Easy, simple playbook to test running playbooks without passwords. Installs security updates on host. 
 requires CentOS host. Test some other playbook if some other distro.
 
-
+```
 ---
  - hosts: all
    become: true  
@@ -212,23 +213,24 @@ requires CentOS host. Test some other playbook if some other distro.
          name: '*'
          security: yes
          state: latest
-
-Create SSH-keys, when location asked answer /home/ansible/docker :
+```
+  
+- Create SSH-keys, when location asked answer /home/ansible/docker :
 
 sudo ssh-keygen
 
-Build Image (Give some name, here I use ansible3 and version number 3.44):
+- Build Image (Give some name, here I use ansible3 and version number 3.44):
 
 If build command doesn't work when using WSL2, try changing: ~/.docker/config.json, credsStore > credStore
 
 sudo docker build -t ansible3:3.44 .
 
-Run sshkey.yml, at this part you will be asked for host passwords:
+- Run sshkey.yml, at this part you will be asked for host passwords:
 
 sudo docker run --rm -it -v /home/ansible/docker:/ansible/playbooks ansible3:3.44 --private-key=/home/ansible/.ssh/id_rsa sshkey.yml -Kk
 
-Run testiUpdate.yml
+- Run testiUpdate.yml
 
 sudo docker run --rm -it -v /home/ansible/docker:/ansible/playbooks ansible3:3.44 --private-key=/home/ansible/.ssh/id_rsa testiUpdate.yml
 
-You can now run playbooks using this run command. just change the name of the playbook from the end of the command.       
+- You can now run playbooks using this run command. just change the name of the playbook from the end of the command.       
