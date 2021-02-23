@@ -1,15 +1,16 @@
 ## Few tests about running ansible playbooks on Docker.
-The newest version is Containers/wsl2_test .  
+The newest version is **Containers/wsl2_test** .  
 Older not (at the moment) working commands are at the bottom of this readme -file.
 
+**WhatToDo.txt** has simple instructions, I will add better ones later.
 
 ### WSL2 version, done using COPY in Dockerfile:
 Used COPY because apparently using volumes to send SSH-keys doesn't work in WSL2.
 
-I did this with W10 computer that has WSL2 and Ubuntu 18.04 distro.
+I did this with **W10 computer** that has **WSL2** and **Ubuntu 18.04** distro.
 My host-machine is CentOS 7.
 
-All the commands:
+Main commands:
 
 ```
 (sudo?) ssh-keygen 
