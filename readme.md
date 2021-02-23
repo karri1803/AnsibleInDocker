@@ -194,8 +194,10 @@ Ansible-playbook -file, that sends the SSH-keys from Docker container to hosts.
         state: present
         key: "{{ lookup('file', '/home/ansible/.ssh/id_rsa.pub') }}"
 ```        
-For example: sudo nano testiUpdate.yml
-
+For example: 
+```
+sudo nano testiUpdate.yml
+```
 **testiUpdate.yml**
 
 Easy, simple playbook to test running playbooks without passwords. Installs security updates on host. 
@@ -216,21 +218,21 @@ requires CentOS host. Test some other playbook if some other distro.
 ```
   
 - Create SSH-keys, when location asked answer /home/ansible/docker :
-
+```
 sudo ssh-keygen
-
+```
 - Build Image (Give some name, here I use ansible3 and version number 3.44):
 
 If build command doesn't work when using WSL2, try changing: ~/.docker/config.json, credsStore > credStore
-
+```
 sudo docker build -t ansible3:3.44 .
-
+```
 - Run sshkey.yml, at this part you will be asked for host passwords:
-
+```
 sudo docker run --rm -it -v /home/ansible/docker:/ansible/playbooks ansible3:3.44 --private-key=/home/ansible/.ssh/id_rsa sshkey.yml -Kk
-
+```
 - Run testiUpdate.yml
-
+```
 sudo docker run --rm -it -v /home/ansible/docker:/ansible/playbooks ansible3:3.44 --private-key=/home/ansible/.ssh/id_rsa testiUpdate.yml
-
+```
 - You can now run playbooks using this run command. just change the name of the playbook from the end of the command.       
