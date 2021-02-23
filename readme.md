@@ -29,17 +29,17 @@ sudo docker run --rm -it -v /home/ansible/docker:/ansible/playbooks ansible3:3.4
 Solution is:  
 In **~/.docker/config.json** change **credsStore** to **credStore**
 
-
-## These are old and did not work for me, saved here for possible future use:
-### build command (old)
+  
+### These are old and did not work for me, saved here for possible future use:
+#### build command (old)
 ```
 Containers\testi3> docker build -t ansible3:3.16 --network=host .
 ```
-### ssh-key without volumes (old)
+#### ssh-key without volumes (old)
 ```
 Containers\testi3> docker run --rm -it -v ${pwd}:/ansible/playbooks ansible3:3.16 testiUpdate.yml
 ```
-### ssh-key with volumes (old)
+#### ssh-key with volumes (old)
 ```
 Containers\testi3> docker run --rm -it -v ~/.ssh/private_key/id_rsa:/root/.ssh/id_rsa -v ~/.ssh/private_key/id_rsa.pub:/root/.ssh/id_rsa.pub -v ${pwd}:/ansible/playbooks ansible3:3.16 testiUpdate.yml
 ```
