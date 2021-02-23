@@ -1,6 +1,6 @@
 # How to run ansible playbooks on Docker.
 The newest and the working version is **Containers/wsl2_test** .  
-Older not (at the moment) working commands are at the bottom of this readme -file.
+Commands for that here.  
 
 **WhatToDo.txt** has simple instructions and you can find more detailed ones here in **readme.md**.
 
