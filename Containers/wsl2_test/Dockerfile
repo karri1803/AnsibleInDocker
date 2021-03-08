@@ -23,9 +23,6 @@ apk add \
  pip install --upgrade pip
 
 RUN mkdir /etc/ansible/ /ansible
-RUN echo "[local]" >> /etc/ansible/hosts && \
-    echo "localhost" >> /etc/ansible/hosts && \
-    echo "ansible@192.168.140.193" >> /etc/ansible/hosts
 
 RUN \
   curl -fsSL https://releases.ansible.com/ansible/ansible-${VERSION}.tar.gz -o ansible.tar.gz && \
@@ -49,13 +46,5 @@ RUN echo "ansible ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 USER ansible
 
 RUN mkdir /home/ansible/.ssh
-
-COPY $USER_HOME/id_rsa /home/ansible/.ssh/id_rsa
-COPY $USER_HOME/id_rsa.pub /home/ansible/.ssh/id_rsa.pub
-RUN sudo chown ansible /home/ansible/.ssh/id_rsa.pub
-RUN sudo chown ansible /home/ansible/.ssh/id_rsa
-
-RUN chmod 600 /home/ansible/.ssh/id_rsa
-RUN chmod 644 /home/ansible/.ssh/id_rsa.pub
 
 ENTRYPOINT ["ansible-playbook"]
